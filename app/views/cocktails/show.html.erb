@@ -1,0 +1,29 @@
+<% content_for(:title) do %>
+  <%= @cocktail.name %> is on Mister Cocktail
+<% end %>
+
+<h1><%= @cocktail.name %></h1>
+<p><strong>Recipe:</strong></p>
+<% @cocktail.doses.each do |dose| %>
+  <ul>
+    <li>
+      <%= "#{dose.ingredient.name}: #{dose.description}" %>
+      <%= link_to '(delete)', cocktail_dose_path(@cocktail, dose),
+        method: :delete,
+        data: { confirm: "Are you sure?" } %>
+    </li>
+  </ul>
+<% end %>
+<br>
+
+<h2>Add an ingredient</h2>
+  <%= simple_form_for [@cocktail, @dose] do |f| %>
+    <%= f.error_notification %>
+
+    <%= f.input :ingredient_id, as: :select, collection: @ingredients %>
+    <%= f.input :description %>
+
+    <%= f.submit "Add an ingredient" %>
+  <% end %>
+
+<p><%= link_to "Back to Homepage", cocktails_path %></p>
