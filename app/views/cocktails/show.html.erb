@@ -2,6 +2,7 @@
   <%= @cocktail.name %> is on Mister Cocktail
 <% end %>
 
+<%= image_tag @cocktail.picture.url(:medium) %>
 <h1><%= @cocktail.name %></h1>
 <p><strong>Recipe:</strong></p>
 <% @cocktail.doses.each do |dose| %>
